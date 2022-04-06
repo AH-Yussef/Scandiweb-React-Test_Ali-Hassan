@@ -1,13 +1,204 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* ------------------- */
+/* Imports   */
+/* ------------------- */
+
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap");
+
+/* ------------------- */
+/* Custom properties   */
+/* ------------------- */
+
+:root {
+  /* colors */
+  --clr-white: 255 255 255;
+  --clr-black: 29 31 34;
+  --clr-dark-gray: 141 143 154;
+  --clr-light-gray: 229 229 229;
+  --clr-accent: 94 206 123;
+  --clr-shadow: 168 172 176;
+  --clr-red: 255 115 119;
+
+  /* font-sizes */
+  --fs-42: 2.625rem;
+  --fs-32: 2rem;
+  --fs-30: 1.875rem;
+  --fs-24: 1.5rem;
+  --fs-18: 1.125rem;
+  --fs-16: 1rem;
+  --fs-14: 0.875rem;
+
+  /* font-weights */
+  --fw-light: 300;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semi-bold: 600;
+  --fw-bold: 700;
+
+  /* font-families */
+  --ff-raleway: "Raleway", sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* ------------------- */
+/* Reset               */
+/* ------------------- */
+
+/* Box sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Reset margins */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+figure,
+img {
+  margin: 0;
+}
+
+button {
+  border: none;
+}
+
+/* set up the body */
+body {
+  font-family: var(--ff-raleway);
+  background-color: rgb(var(--clr-white));
+  line-height: 1.5;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* remove animations for people who've turned them off */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ------------------- */
+/* Utility classes     */
+/* ------------------- */
+
+/* general */
+
+.flex {
+  display: flex;
+  gap: var(--gap, 0);
+}
+
+.container {
+  padding-inline: 6.313rem;
+  margin-inline: auto;
+  max-width: 90rem;
+}
+
+.select-none {
+  user-select: none;
+}
+
+.vh-center {
+  display: inline-grid;
+  place-items: center;
+}
+
+.contained-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.text-link {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+/* colors */
+
+.bg-white {
+  background-color: rgb(var(--clr-white));
+}
+.bg-black {
+  background-color: rgb(var(--clr-black));
+}
+.bg-light {
+  background-color: rgb(var(--clr-light-gray));
+}
+.bg-accent {
+  background-color: rgb(var(--clr-accent));
+}
+
+.text-white {
+  color: rgb(var(--clr-white));
+}
+.text-black {
+  color: rgb(var(--clr-black));
+}
+.text-dark-gray {
+  color: rgb(var(--clr-dark-gray));
+}
+.text-light-gray {
+  color: rgb(var(--clr-light-gray));
+}
+.text-accent {
+  color: rgb(var(--clr-accent));
+}
+
+/* typography */
+
+.ff-raleway {
+  font-family: var(--ff-raleway);
+}
+
+.upper-case {
+  text-transform: uppercase;
+}
+
+.fs-42 {
+  font-size: var(--fs-42);
+}
+.fs-32 {
+  font-size: var(--fs-32);
+}
+.fs-30 {
+  font-size: var(--fs-30);
+}
+.fs-24 {
+  font-size: var(--fs-24);
+}
+.fs-18 {
+  font-size: var(--fs-18);
+}
+.fs-16 {
+  font-size: var(--fs-16);
+}
+.fs-14 {
+  font-size: var(--fs-14);
+}
+
+.fw-light {
+  font-weight: var(--fw-light);
+}
+.fw-regular {
+  font-weight: var(--fw-regular);
+}
+.fw-medium {
+  font-weight: var(--fw-medium);
+}
+.fw-semi-bold {
+  font-weight: var(--fw-semi-bold);
+}
+.fw-bold {
+  font-weight: var(--fw-bold);
 }

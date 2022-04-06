@@ -1,0 +1,14 @@
+.header {
+  padding: 5rem 6.313rem; /*top-bottom left-right*/
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 2.5rem;
+  row-gap: 6.438rem;
+}
+
+.footer {
+  height: 12rem;
+}
