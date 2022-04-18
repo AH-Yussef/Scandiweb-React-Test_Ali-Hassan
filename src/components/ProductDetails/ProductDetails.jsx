@@ -45,6 +45,7 @@ export default class ProductDetails extends Component {
         <div className='info-container flex text-black'>
           <div className='fs-30 fw-semi-bold'>{ brand }</div>
           <div className='product-name fs-30 fw-regular'>{ name }</div>
+          {!inStock && <div className='fs-24 text-red fw-light upper-case'>out of stock</div>}
           <div className='attributes-area'>
           {
             attributes.map(attribute => (
@@ -95,7 +96,7 @@ export default class ProductDetails extends Component {
   }
 
   formatAttrItem = (item, index, attribute) => {
-    let classes = 'attribute-box fs-16 fw-regular vh-center ';
+    let classes = 'attribute-box fs-16 fw-regular select-none vh-center ';
     
     if (attribute.type.toLowerCase() === "swatch") {
       if (attribute.selected === index) classes += 'attr-swatch-active text-white';

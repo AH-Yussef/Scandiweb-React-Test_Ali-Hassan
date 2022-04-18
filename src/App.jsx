@@ -28,41 +28,46 @@ export default class App extends Component {
   state = {
     activeCurrency: 0,
     activeCategory: 'all',
+    
+
   };
 
   render() {
-    const { activeCurrency, cartTotalQty } = this.state;
+    const { activeCurrency } = this.state;
 
     return (
       <ApolloProvider client={client}>      
-        <Router>
-          <Navbar 
-            cartTotalQty={ this.getCartQty() }
-            onChangeCurrency={ this.hanldeChangeCurrency } 
-            onUpdateCartOverlay={this.handleUpdateCartOverlay}
-          />
-          <Switch>
-            <Route exact path="/category/:category" component={props => 
-              <ProductsGrid 
-                category={ props.match.params.category } 
-                currency={ activeCurrency } 
-                onSettingActiveCategory={this.handleSettingActiveCategory}
-              />
-            }/>
-            <Route exact path="/products/:productId" component={props => 
-              <ProductDetails 
-                productId={ props.match.params.productId } 
-                currency={ activeCurrency } 
-                apolloClient={ client }
-                onUpdateCart={this.handleUpdateCartBadge}
-              />  
-            }/>
-            <Route exact path="/cart" component={() => 
-              <Cart currency={ activeCurrency } cart={this.fetchCart()} onUpdateCart={this.handleUpdateCartBadge}/>  
-            }/>
-            <Redirect exact from='/' to='category/all'/>
-          </Switch>
-        </Router>
+          <Router>
+            <Navbar 
+              cartTotalQty={ this.getCartQty() }
+              onChangeCurrency={ this.hanldeChangeCurrency } 
+              onUpdateCartOverlay={this.handleUpdateCartOverlay}
+
+              onToggleCurrencyMenu={ this.toggleCurrecyMenu }
+              onToggleCartOverlayMenu={ this.toggleCartOverlay }
+            />
+            <Switch>
+              <Route exact path="/category/:category" component={props => 
+                <ProductsGrid 
+                  category={ props.match.params.category } 
+                  currency={ activeCurrency } 
+                  onSettingActiveCategory={this.handleSettingActiveCategory}
+                />
+              }/>
+              <Route exact path="/products/:productId" component={props => 
+                <ProductDetails 
+                  productId={ props.match.params.productId } 
+                  currency={ activeCurrency } 
+                  apolloClient={ client }
+                  onUpdateCart={this.handleUpdateCartBadge}
+                />  
+              }/>
+              <Route exact path="/cart" component={() => 
+                <Cart currency={ activeCurrency } cart={this.fetchCart()} onUpdateCart={this.handleUpdateCartBadge}/> 
+              }/>
+              <Redirect exact from='/' to='category/all'/>
+            </Switch>
+          </Router>
       </ApolloProvider>
     )
   }

@@ -51,7 +51,7 @@ export default class CartItem extends Component {
             }
             {
               cartItem.quantity === 1 && 
-              <div className='qty-control-btn fs-32 fw-regular vh-center remove-item-btn' onClick={this.removeItem}>
+              <div className='qty-control-btn remove-item-btn fs-32 fw-regular vh-center' onClick={this.removeItem}>
                 <img src={remove} alt="decrease quantity" className='remove-item-icon'/>
               </div>
             }
@@ -62,11 +62,14 @@ export default class CartItem extends Component {
             </div>
 
             <div className='switch-img-btn vh-center switch-img-forward select-none' onClick={this.goToNextImg}>
-              <img src={rightArrow} alt="switch to next image" width={6} height={12}/>
+              <img src={rightArrow} alt="switch to next" width={6} height={12}/>
             </div>
             <div className='switch-img-btn vh-center switch-img-back select-none' onClick={this.goToPrevImg}>
-              <img src={rightArrow} alt="switch to next image" width={6} height={12}/>
+              <img src={rightArrow} alt="switch to prev" width={6} height={12}/>
             </div>
+          </div>
+          <div className='qty-control-btn remove-item-btn fs-32 fw-regular vh-center' onClick={this.removeItem}>
+            <img src={remove} alt="decrease quantity" className='remove-item-icon'/>
           </div>
         </div>
       </div>
@@ -80,7 +83,7 @@ export default class CartItem extends Component {
   };
 
   formatAttrItem = (item, index, attribute) => {
-    let classes = 'cart-item-attribute-box fs-16 fw-regular vh-center ';
+    let classes = 'cart-item-attribute-box fs-16 fw-regular select-none vh-center ';
     
     if (attribute.type.toLowerCase() === "swatch") {
       if (attribute.selected === index) classes += 'cart-item-attr-swatch-active text-white';
@@ -89,17 +92,36 @@ export default class CartItem extends Component {
           key={item.value} 
           className={classes} 
           style={{backgroundColor:item.value}}
+          onClick={() => this.changeAttribute(attribute, index)}
         />
       )
     }
     else {
       if (attribute.selected === index) classes += 'bg-black text-white';
       return (
-        <div key={item.value} className={classes}>
+        <div key={item.value} className={classes} onClick={() => this.changeAttribute(attribute, index)}>
           <span>{ item.value }</span>
         </div>
       )
     }
+  }
+
+  changeAttribute = (targetAttribute, index) => {
+    const { cartItem } = this.state;
+    const cart = JSON.parse(sessionStorage.getItem(CART));
+    for (const item of cart) {
+      if (item.id === cartItem.id) {
+        for (const attribute of item.attributes) {
+          if (attribute.name === targetAttribute.name) {
+            attribute.selected = index;
+          }
+        }
+        this.setState({ cartItem: item });
+        break;
+      }
+    }
+    sessionStorage.setItem(CART, JSON.stringify(cart));
+    this.props.onUpdateCart();
   }
 
   goToNextImg = () => {
@@ -121,7 +143,7 @@ export default class CartItem extends Component {
     const cart = JSON.parse(sessionStorage.getItem(CART));
     for (const item of cart) {
       if (item.id === cartItem.id) {
-        item.quantity += change;
+        item.attriubtes += change;
         this.setState({ cartItem: item });
         break;
       }

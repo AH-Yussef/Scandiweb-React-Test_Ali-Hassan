@@ -96,7 +96,8 @@
 
 .cart-overlay {
   position: absolute;
-  width: 20.313rem;
+  /* width: 21.813rem; */
+  width: 23rem;
   max-height: 33.75rem;
   right: 4.875rem;
   top: 4.063rem;
@@ -126,13 +127,14 @@
 }
 
 .cart-overlay-footer {
-  --gap: 0.75rem;
+  --gap: 1rem;
 }
 
 .cart-overlay-footer-btn {
   height: 2.688rem;
-  width: 8.75rem;
-  padding: 0.75rem 2rem; /*top-bottom left-right*/
+  width: 10rem;
+  padding: 0.75rem 0rem; /*top-bottom left-right*/
+  text-align: center;
 }
 .cart-overlay-viewbag-btn {
   border: 1px solid rgb(var(--clr-black));

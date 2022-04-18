@@ -154,6 +154,9 @@ body {
 .text-accent {
   color: rgb(var(--clr-accent));
 }
+.text-red {
+  color: rgb(var(--clr-red));
+}
 
 /* typography */
 

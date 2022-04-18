@@ -9,14 +9,28 @@ import { CartItemMini } from  '../../components';
 import { FETCH_CATEGORIES, FETCH_CURRENCIES } from '../../GraphQl/queries'
 
 export default class Navbar extends Component {
-  state = {
-    isCurrencyMenuShown: false,
-    currentCurrencyLabel: '$',
-    currentCurrencyIndex: 0,
-    activeCategory: 'all',
+  constructor(props) {
+    super(props);
+    this.wrapperRef = React.createRef();
 
-    cartTotalQty: this.props.cartTotalQty,
-    isCartOverlayShown: false,
+    this.state = {
+      currentCurrencyLabel: '$',
+      currentCurrencyIndex: 0,
+      activeCategory: 'all',
+  
+      cartTotalQty: props.cartTotalQty,
+
+      isCurrencyMenuShown: false,
+      isCartOverlayShown: false,
+    }
+  }
+
+  componentDidMount() {
+    document.addEventListener("mousedown", this.handleClickOutside);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("mousedown", this.handleClickOutside);
   }
 
   componentDidUpdate(prevProps) {
@@ -28,7 +42,7 @@ export default class Navbar extends Component {
   }
 
   render() {
-    const { isCurrencyMenuShown, currentCurrencyLabel, isCartOverlayShown, cartTotalQty } = this.state;
+    const { currentCurrencyLabel, cartTotalQty, isCurrencyMenuShown, isCartOverlayShown } = this.state;
 
     return (
       <div className='nav-bar flex'>
@@ -39,7 +53,8 @@ export default class Navbar extends Component {
         <div className='logo vh-center'>
           <img src={logo} alt="logo" />
         </div>
-        <div className='cart-currency flex'>
+
+        <div className='cart-currency flex' ref={this.wrapperRef}>
           <div className='currency'>
             <div onClick={this.toggleCurrecyMenu}>
               <span className='fs-18 fw-medium currency-icon select-none'>{currentCurrencyLabel}</span>
@@ -53,14 +68,14 @@ export default class Navbar extends Component {
             )}
           </div>
           
-          <div className='cart vh-center'>
+          <div className='cart vh-center' ref={this.wrapperRef}>
             <div className='vh-center' onClick={this.toggleCartOverlay}>
               <img src={cartDark} alt="cart"/>
               {cartTotalQty > 0 && <div className='qty-badge text-white fs-14 fw-bold select-none'>{cartTotalQty}</div>}
             </div>
 
             {isCartOverlayShown && (
-              <div className='cart-overlay bg-white'>
+              <div className='cart-overlay bg-white' id='cart-overlay'>
                 <div className='text-black fs-16'>
                   <span className='fw-bold'>My Bag,</span>
                   <span className='fw-medium'> {cartTotalQty} items</span>
@@ -87,7 +102,6 @@ export default class Navbar extends Component {
               </div>
             )}
           </div>
-
         </div>
       </div>
     )
@@ -104,7 +118,7 @@ export default class Navbar extends Component {
             className={this.setCategoryClasses(name)} 
             onClick={() => this.selectCategory(name)}
           >
-              { name }
+            { name }
           </Link>
         ));
       }}
@@ -151,6 +165,12 @@ export default class Navbar extends Component {
     this.setState({ isCartOverlayShown: !this.state.isCartOverlayShown, isCurrencyMenuShown: false});
   }
 
+  closeAllMenus = () => {
+    const { isCurrencyMenuShown, isCartOverlayShown } = this.state;
+    if(isCurrencyMenuShown) this.setState({ isCurrencyMenuShown: false });
+    if(isCartOverlayShown) this.setState({ isCartOverlayShown: false });
+  }
+
   fetchCart = () => {
     const { currentCurrencyIndex } = this.state;
     const cart = JSON.parse(sessionStorage.getItem(CART)) || [];
@@ -179,6 +199,13 @@ export default class Navbar extends Component {
     cart.forEach(item => total += item.quantity*item.prices[currentCurrencyIndex].amount);
     const { currency } = cart[0].prices[currentCurrencyIndex];
     
-    return `${currency.symbol} ${total}`;
+    return `${currency.symbol} ${total.toFixed(2)}`;
+  }
+
+  handleClickOutside = (event) => {
+    if (this.wrapperRef.current === null) return;
+    if (this.wrapperRef && !this.wrapperRef.current.contains(event.target)) {
+      this.closeAllMenus();
+    }
   }
 }

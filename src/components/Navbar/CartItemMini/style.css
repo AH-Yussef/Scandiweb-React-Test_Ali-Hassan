@@ -1,6 +1,7 @@
 .cart-item-mini {
   --gap: 0.5rem;
-  width: 18.313rem;
+  /* width: 19.813rem; */
+  width: 21rem;
   margin-top: 1.5rem;
 }
 

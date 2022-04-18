@@ -59,6 +59,10 @@ export default class CartItemMini extends Component {
           <div className='cart-item-mini-img-container'>
             <img src={cartItem.gallery[0]} alt='cart item' className='contained-img'/>
           </div>
+
+          <div className='mini-qty-control-btn vh-center mini-remove-item-btn' onClick={this.removeItem}>
+            <img src={remove} alt="decrease quantity" className='mini-remove-item-icon'/>
+          </div>
         </div>
       </div>
     )
@@ -71,7 +75,7 @@ export default class CartItemMini extends Component {
   };
 
   formatAttrItem = (item, index, attribute) => {
-    let classes = 'cart-item-mini-attribute-box fs-14 fw-regular vh-center ';
+    let classes = 'cart-item-mini-attribute-box fs-14 fw-regular select-none vh-center ';
     
     if (attribute.type.toLowerCase() === "swatch") {
       if (attribute.selected === index) classes += 'cart-item-mini-attr-swatch-active text-white';
@@ -80,17 +84,36 @@ export default class CartItemMini extends Component {
           key={item.value} 
           className={classes} 
           style={{backgroundColor:item.value}}
+          onClick={() => this.changeAttribute(attribute, index)}
         />
       )
     }
     else {
       if (attribute.selected === index) classes += 'bg-black text-white';
       return (
-        <div key={item.value} className={classes}>
+        <div key={item.value} className={classes} onClick={() => this.changeAttribute(attribute, index)}>
           <span>{ item.value }</span>
         </div>
       )
     }
+  }
+
+  changeAttribute = (targetAttribute, index) => {
+    const { cartItem } = this.state;
+    const cart = JSON.parse(sessionStorage.getItem(CART));
+    for (const item of cart) {
+      if (item.id === cartItem.id) {
+        for (const attribute of item.attributes) {
+          if (attribute.name === targetAttribute.name) {
+            attribute.selected = index;
+          }
+        }
+        this.setState({ cartItem: item });
+        break;
+      }
+    }
+    sessionStorage.setItem(CART, JSON.stringify(cart));
+    this.props.onUpdateCartOverlay();
   }
 
   changeQty = (change) => {
