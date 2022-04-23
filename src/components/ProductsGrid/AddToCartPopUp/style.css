@@ -1,0 +1,69 @@
+.popup {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 10;
+}
+
+.popup_inner {
+  position: absolute;
+  left: 27%;
+  right: 27%;
+  top: 30%;
+  margin: auto;
+  padding: 2rem;
+  border: 1px solid rgb(var(--clr-black));
+  box-shadow: 0px 4px 35px rgba(var(--clr-shadow) / 0.19);
+  flex-direction: column;
+}
+
+.popup-price {
+  padding: 0.75rem 0rem;
+}
+
+.popup-attributes-area {
+  --gap: 0.75rem;
+}
+.popup-attributes-area > *:where(:not(:first-child)) {
+  margin-top: 1rem;
+}
+
+.popup-right-side {
+  margin-left: auto;
+}
+.popup-img-container {
+  height: 13rem;
+  width: 8.75rem;
+  border: 1px solid black;
+}
+
+.popup-footer {
+  --gap: 1rem;
+  margin-top: 1.5rem;
+  justify-content: space-between;
+}
+
+.popup-btn {
+  height: 2.8rem;
+  width: 50%;
+  padding: 0.5rem 0rem; /*top-bottom left-right*/
+  text-align: center;
+}
+
+.popup-add-to-cart-btn {
+  cursor: pointer;
+}
+
+.popup-cancel-btn {
+  border: 1px solid rgb(var(--clr-black));
+  transition: background-color 20ms ease-in-out;
+}
+.popup-cancel-btn:hover {
+  background-color: rgb(var(--clr-black));
+  color: rgb(var(--clr-white));
+}

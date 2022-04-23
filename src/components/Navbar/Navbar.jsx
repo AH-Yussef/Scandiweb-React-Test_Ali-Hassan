@@ -9,12 +9,6 @@ import { logo, cartDark, arrow } from '../../assets';
 import { CartItemMini } from '../../components';
 import { FETCH_CATEGORIES, FETCH_CURRENCIES } from '../../GraphQl/queries';
 
-Navbar.propTypes = {
-  cartTotalQty: PropTypes.any,
-  onChangeCurrency: PropTypes.any,
-  onUpdateCartOverlay: PropTypes.any
-};
-
 export default class Navbar extends Component {
   constructor(props) {
     super(props);
@@ -62,8 +56,8 @@ export default class Navbar extends Component {
           <img src={logo} alt="logo" />
         </div>
 
-        <div className="cart-currency flex" ref={this.wrapperRef}>
-          <div className="currency">
+        <div className="cart-currency flex">
+          <div className="currency" ref={this.wrapperRef}>
             <div onClick={this.toggleCurrecyMenu}>
               <span className="fs-18 fw-medium currency-icon select-none">
                 {currentCurrencyLabel}
@@ -237,3 +231,9 @@ export default class Navbar extends Component {
     }
   };
 }
+
+Navbar.propTypes = {
+  cartTotalQty: PropTypes.any,
+  onChangeCurrency: PropTypes.any,
+  onUpdateCartOverlay: PropTypes.any
+};

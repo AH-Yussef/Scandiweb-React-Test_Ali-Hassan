@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client'
+import { gql } from '@apollo/client';
 
 export const FETCH_CATEGORIES = gql`
   query {
@@ -11,7 +11,7 @@ export const FETCH_CATEGORIES = gql`
 export const FETCH_CURRENCIES = gql`
   query {
     currencies {
-      label,
+      label
       symbol
     }
   }
@@ -19,22 +19,22 @@ export const FETCH_CURRENCIES = gql`
 
 export const FETCH_PRODUCTS = gql`
   query ($title: String!) {
-    category(input: {title: $title}) {
-      name, 
+    category(input: { title: $title }) {
+      name
       products {
-        id,
-        name,
-        inStock,
-        gallery,
+        id
+        name
+        inStock
+        gallery
         prices {
           currency {
-            label,
-            symbol,
-          },
+            label
+            symbol
+          }
           amount
-        },
+        }
         attributes {
-          name,
+          name
         }
       }
     }
@@ -44,24 +44,24 @@ export const FETCH_PRODUCTS = gql`
 export const FETCH_SINGLE_PRODUCT = gql`
   query ($id: String!) {
     product(id: $id) {
-      brand,
-      name, 
-      gallery,
-      description,
-      inStock,
+      brand
+      name
+      gallery
+      description
+      inStock
       prices {
         currency {
-          label,
-          symbol,
-        },
+          label
+          symbol
+        }
         amount
-      },
+      }
       attributes {
-        name,
-        type,
+        name
+        type
         items {
-          value,
-          displayValue,
+          value
+          displayValue
         }
       }
     }

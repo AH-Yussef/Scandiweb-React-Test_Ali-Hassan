@@ -6,13 +6,6 @@ import './style.css';
 import { FETCH_SINGLE_PRODUCT } from '../../GraphQl/queries';
 import { CART } from '../Const';
 
-ProductDetails.propTypes = {
-  apolloClient: PropTypes.any,
-  productId: PropTypes.any,
-  currency: PropTypes.any,
-  onUpdateCart: PropTypes.any
-};
-
 export default class ProductDetails extends Component {
   constructor(props) {
     super(props);
@@ -200,3 +193,10 @@ export default class ProductDetails extends Component {
     return isMatch;
   }
 }
+
+ProductDetails.propTypes = {
+  apolloClient: PropTypes.any,
+  productId: PropTypes.any,
+  currency: PropTypes.any,
+  onUpdateCart: PropTypes.any
+};

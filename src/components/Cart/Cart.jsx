@@ -4,12 +4,6 @@ import PropTypes from 'prop-types';
 import './style.css';
 import { CartItem } from '../../components';
 
-Cart.propTypes = {
-  cart: PropTypes.any,
-  currency: PropTypes.any,
-  onUpdateCart: PropTypes.any
-};
-
 export default class Cart extends Component {
   render() {
     const { cart, currency } = this.props;
@@ -33,3 +27,9 @@ export default class Cart extends Component {
 
   handleUpdateCart = () => this.props.onUpdateCart();
 }
+
+Cart.propTypes = {
+  cart: PropTypes.any,
+  currency: PropTypes.any,
+  onUpdateCart: PropTypes.any
+};

@@ -6,11 +6,6 @@ import './style.css';
 import { FETCH_PRODUCTS } from '../../GraphQl/queries';
 import { ProductCard } from '../../components';
 
-ProductsGrid.propTypes = {
-  category: PropTypes.any,
-  currency: PropTypes.any
-};
-
 export default class ProductsGrid extends Component {
   render() {
     const { category } = this.props;
@@ -30,11 +25,25 @@ export default class ProductsGrid extends Component {
         if (loading) return <></>;
         if (error) console.log(error);
         else {
+          const { currency, apolloClient } = this.props;
           return data.category.products.map((product) => (
-            <ProductCard key={product.id} product={product} currency={this.props.currency} />
+            <ProductCard
+              key={product.id}
+              product={product}
+              currency={currency}
+              apolloClient={apolloClient}
+              onUpdateCart={this.props.onUpdateCart}
+            />
           ));
         }
       }}
     </Query>
   );
 }
+
+ProductsGrid.propTypes = {
+  category: PropTypes.any,
+  currency: PropTypes.any,
+  apolloClient: PropTypes.any,
+  onUpdateCart: PropTypes.any
+};

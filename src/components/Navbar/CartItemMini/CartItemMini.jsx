@@ -8,12 +8,6 @@ import { CART } from '../../Const';
 const INCREASE = 1;
 const DECREASE = -1;
 
-CartItemMini.propTypes = {
-  cartItem: PropTypes.any,
-  currency: PropTypes.any,
-  onUpdateCartOverlay: PropTypes.any
-};
-
 export default class CartItemMini extends Component {
   state = {
     cartItem: this.props.cartItem
@@ -179,3 +173,9 @@ export default class CartItemMini extends Component {
     return isMatch;
   }
 }
+
+CartItemMini.propTypes = {
+  cartItem: PropTypes.any,
+  currency: PropTypes.any,
+  onUpdateCartOverlay: PropTypes.any
+};
