@@ -22,7 +22,6 @@ export default class Product extends Component {
     return (
       <div
         className={`product-card flex bg-white fs-18 ${inStock ? 'text-black' : 'text-dark-gray'}`}
-        // onMouseEnter={this.showAddToCartBtn}
         onMouseOver={this.showAddToCartBtn}
         onMouseLeave={this.hideAddToCartBtn}>
         <Link to={`/products/${id}`} className="text-link product-card-body">
