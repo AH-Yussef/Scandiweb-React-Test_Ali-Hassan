@@ -29,7 +29,8 @@ export default class CartItemMini extends Component {
 
           <div className="cart-item-mini-attributes-area">
             {cartItem.attributes.map((attribute) => (
-              <div key={attribute.name} className="cart-item-mini-attributes-line flex">
+              <div key={attribute.name} className="cart-item-mini-attributes-box flex">
+                <div className="fs-14 upper-case">{attribute.name}:</div>
                 <div className="flex">
                   {attribute.items.map((item, index) =>
                     this.formatAttrItem(item, index, attribute)
@@ -84,7 +85,7 @@ export default class CartItemMini extends Component {
   };
 
   formatAttrItem = (item, index, attribute) => {
-    let classes = 'cart-item-mini-attribute-box fs-14 fw-regular select-none vh-center ';
+    let classes = 'cart-item-mini-attribute-line fs-14 fw-regular select-none vh-center ';
 
     if (attribute.type.toLowerCase() === 'swatch') {
       if (attribute.selected === index) classes += 'cart-item-mini-attr-swatch-active text-white';

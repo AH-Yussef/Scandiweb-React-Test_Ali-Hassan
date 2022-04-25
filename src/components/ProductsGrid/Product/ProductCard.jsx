@@ -22,8 +22,9 @@ export default class Product extends Component {
     return (
       <div
         className={`product-card flex bg-white fs-18 ${inStock ? 'text-black' : 'text-dark-gray'}`}
-        onMouseEnter={this.toggleAddToCartBtn}
-        onMouseLeave={this.toggleAddToCartBtn}>
+        // onMouseEnter={this.showAddToCartBtn}
+        onMouseOver={this.showAddToCartBtn}
+        onMouseLeave={this.hideAddToCartBtn}>
         <Link to={`/products/${id}`} className="text-link product-card-body">
           {!inStock && (
             <div className="out-of-stock fs-24 fw-regular upper-case vh-center text-dark-gray">
@@ -47,22 +48,26 @@ export default class Product extends Component {
             currency={currency}
             apolloClient={apolloClient}
             onUpdateCart={this.props.onUpdateCart}
-            onClosePopup={this.toggleAddToCartPopup}
+            onClosePopup={this.hideAddToCartPopup}
           />
         )}
       </div>
     );
   }
 
-  toggleAddToCartBtn = () => {
-    this.setState({ isAddToCartBtnShown: !this.state.isAddToCartBtnShown });
+  showAddToCartBtn = () => {
+    this.setState({ isAddToCartBtnShown: true });
+  };
+  hideAddToCartBtn = () => {
+    this.setState({ isAddToCartBtnShown: false });
   };
 
-  toggleAddToCartPopup = () => {
-    this.setState({
-      isAddToCartPopupShown: !this.state.isAddToCartPopupShown,
-      isAddToCartBtnShown: false
-    });
+  showAddToCartPopup = () => {
+    this.setState({ isAddToCartPopupShown: true });
+  };
+  hideAddToCartPopup = () => {
+    this.setState({ isAddToCartPopupShown: false });
+    this.hideAddToCartBtn();
   };
 
   formatCurrrency = () => {
@@ -73,7 +78,7 @@ export default class Product extends Component {
 
   addToCartOrShowPopup = () => {
     if (this.props.product.attributes.length > 0) {
-      this.toggleAddToCartPopup();
+      this.showAddToCartPopup();
       return;
     }
 

@@ -31,6 +31,7 @@ export default class CartItem extends Component {
           <div className="cart-item-attributes-area">
             {cartItem.attributes.map((attribute) => (
               <div key={attribute.name}>
+                <div className="fs-18 upper-case">{attribute.name}:</div>
                 <div className="flex">
                   {attribute.items.map((item, index) =>
                     this.formatAttrItem(item, index, attribute)

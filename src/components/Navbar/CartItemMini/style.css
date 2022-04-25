@@ -13,17 +13,17 @@
 }
 
 .cart-item-mini-attributes-area {
-  --gap: 0.4rem;
+  margin-top: 0.5rem;
 }
 .cart-item-mini-attributes-area > *:where(:not(:first-child)) {
   margin-top: 1rem;
 }
 
-.cart-item-mini-attributes-line {
-  flex-wrap: wrap;
+.cart-item-mini-attributes-box {
+  flex-direction: column;
 }
 
-.cart-item-mini-attribute-box {
+.cart-item-mini-attribute-line {
   height: 1.5rem;
   min-width: 1.5rem;
   padding: 0 0.4rem;
