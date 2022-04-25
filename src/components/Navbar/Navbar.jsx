@@ -56,58 +56,62 @@ export default class Navbar extends Component {
           <img src={logo} alt="logo" />
         </div>
 
-        <div className="cart-currency flex">
-          <div className="currency" ref={this.wrapperRef}>
-            <div onClick={this.toggleCurrecyMenu}>
-              <span className="fs-18 fw-medium currency-icon select-none">
-                {currentCurrencyLabel}
-              </span>
-              <img
-                src={arrow}
-                alt="arrow"
-                width={9}
-                className={isCurrencyMenuShown ? 'arrow-active' : 'arrow-inactive'}
-              />
-            </div>
+        <div className="cart-currency-container flex">
+          <div className="cart-currency flex" ref={this.wrapperRef}>
+            <div className="currency">
+              <div onClick={this.toggleCurrecyMenu}>
+                <span className="fs-18 fw-medium currency-icon select-none">
+                  {currentCurrencyLabel}
+                </span>
+                <img
+                  src={arrow}
+                  alt="arrow"
+                  width={9}
+                  className={isCurrencyMenuShown ? 'arrow-active' : 'arrow-inactive'}
+                />
+              </div>
 
-            {isCurrencyMenuShown && (
-              <div className="currency-menu bg-white">{this.fetchCurrencies()}</div>
-            )}
-          </div>
-
-          <div className="cart vh-center" ref={this.wrapperRef}>
-            <div className="vh-center" onClick={this.toggleCartOverlay}>
-              <img src={cartDark} alt="cart" />
-              {cartTotalQty > 0 && (
-                <div className="qty-badge text-white fs-14 fw-bold select-none">{cartTotalQty}</div>
+              {isCurrencyMenuShown && (
+                <div className="currency-menu bg-white">{this.fetchCurrencies()}</div>
               )}
             </div>
 
-            {isCartOverlayShown && (
-              <div className="cart-overlay bg-white" id="cart-overlay">
-                <div className="text-black fs-16">
-                  <span className="fw-bold">My Bag,</span>
-                  <span className="fw-medium"> {cartTotalQty} items</span>
-                </div>
-                <div className="cart-overlay-list">{this.fetchCart()}</div>
-                <div className="cart-overlay-total flex">
-                  <div className="text-black fs-16 fw-bold">Total</div>
+            <div className="cart vh-center">
+              <div className="vh-center" onClick={this.toggleCartOverlay}>
+                <img src={cartDark} alt="cart" />
+                {cartTotalQty > 0 && (
+                  <div className="qty-badge text-white fs-14 fw-bold select-none">
+                    {cartTotalQty}
+                  </div>
+                )}
+              </div>
 
-                  <div className="text-black fs-16 fw-bold">{this.getTotalPrice()}</div>
-                </div>
-                <div className="cart-overlay-footer flex fs-14 fw-semi-bold upper-case">
-                  <Link
-                    to="/cart"
-                    className="cart-overlay-footer-btn text-link cart-overlay-viewbag-btn text-black select-none"
-                    onClick={this.toggleCartOverlay}>
-                    view bag
-                  </Link>
-                  <div className="cart-overlay-footer-btn bg-accent text-white select-none">
-                    checkout
+              {isCartOverlayShown && (
+                <div className="cart-overlay bg-white" id="cart-overlay">
+                  <div className="text-black fs-16">
+                    <span className="fw-bold">My Bag,</span>
+                    <span className="fw-medium"> {cartTotalQty} items</span>
+                  </div>
+                  <div className="cart-overlay-list">{this.fetchCart()}</div>
+                  <div className="cart-overlay-total flex">
+                    <div className="text-black fs-16 fw-bold">Total</div>
+
+                    <div className="text-black fs-16 fw-bold">{this.getTotalPrice()}</div>
+                  </div>
+                  <div className="cart-overlay-footer flex fs-14 fw-semi-bold upper-case">
+                    <Link
+                      to="/cart"
+                      className="cart-overlay-footer-btn text-link cart-overlay-viewbag-btn text-black select-none"
+                      onClick={this.toggleCartOverlay}>
+                      view bag
+                    </Link>
+                    <div className="cart-overlay-footer-btn bg-accent text-white select-none">
+                      checkout
+                    </div>
                   </div>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -151,7 +155,7 @@ export default class Navbar extends Component {
             <div
               key={label}
               onClick={() => this.selectCurrency(index, symbol)}
-              className="currency-option fs-18 fw-medium flex">
+              className="currency-option fs-18 fw-medium flex select-none">
               <div className="currency-symbol">{symbol}</div>
               {label}
             </div>
@@ -164,7 +168,7 @@ export default class Navbar extends Component {
   selectCurrency = (index, symbol) => {
     this.props.onChangeCurrency(index);
     this.setState({ currentCurrencyLabel: symbol });
-    this.setStete({ currentCurrencyIndex: index });
+    this.setState({ currentCurrencyIndex: index });
     this.toggleCurrecyMenu();
   };
 

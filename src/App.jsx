@@ -35,7 +35,7 @@ export default class App extends Component {
         <Router>
           <Navbar
             cartTotalQty={this.getCartQty()}
-            onChangeCurrency={this.hanldeChangeCurrency}
+            onChangeCurrency={this.handleChangeCurrency}
             onUpdateCartOverlay={this.handleUpdateCartOverlay}
             onToggleCurrencyMenu={this.toggleCurrecyMenu}
             onToggleCartOverlayMenu={this.toggleCartOverlay}
@@ -86,7 +86,7 @@ export default class App extends Component {
 
   hanldeChangeCategory = (name) => this.setState({ activeCategory: name });
 
-  hanldeChangeCurrency = (index) => this.setState({ activeCurrency: index });
+  handleChangeCurrency = (index) => this.setState({ activeCurrency: index });
 
   handleUpdateCartBadge = () => {
     this.setState({ cartTotalQty: null });
